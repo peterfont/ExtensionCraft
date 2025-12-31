@@ -1,0 +1,75 @@
+{
+  "manifest_version": 3,
+  "name": "我的浏览器插件",
+  "version": "1.0.0",
+  "description": "插件描述信息",
+  
+  "icons": {
+    "16": "icons/icon16.png",
+    "48": "icons/icon48.png",
+    "128": "icons/icon128.png"
+  },
+  
+  "action": {
+    "default_popup": "popup.html",
+    "default_icon": {
+      "16": "icons/icon16.png",
+      "48": "icons/icon48.png",
+      "128": "icons/icon128.png"
+    }
+  },
+  
+  "side_panel": {
+    "default_path": "sidepanel.html"
+  },
+  
+  "background": {
+    "service_worker": "background.js",
+    "type": "module"
+  },
+  
+  "content_scripts": [
+    {
+      "matches": ["<all_urls>"],
+      "js": ["content.js"],
+      "css": ["content.css"],
+      "run_at": "document_end"
+    }
+  ],
+  
+  "web_accessible_resources": [
+    {
+      "resources": ["injected.js"],
+      "matches": ["<all_urls>"]
+    }
+  ],
+  
+  "permissions": [
+    "storage",
+    "tabs",
+    "activeTab",
+    "scripting",
+    "sidePanel"
+  ],
+  
+  "host_permissions": [
+    "https://*/*",
+    "http://*/*"
+  ],
+  
+  "optional_permissions": [
+    "downloads",
+    "bookmarks"
+  ],
+  
+  "options_page": "options.html",
+  
+  "chrome_url_overrides": {
+    "newtab": "newtab.html"
+  },
+  
+  "externally_connectable": {
+    "matches": ["https://example.com/*"]
+  }
+}
+
